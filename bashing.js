@@ -373,12 +373,12 @@ var keneanung = (function (keneanung) {
 
         module.flee = function() {
             stopAttack();
-            send_direct("queue prepend eqbal " + fleeDirection)
+            send_direct("queue bal " + fleeDirection)
         };
 
         module.handleShield = function() {
             if(config.autoraze){
-                send_direct("queue prepend bal keneanungra", false);
+                send_direct("queue bal keneanungra", false);
             }
         };
 
