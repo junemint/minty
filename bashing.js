@@ -1,4 +1,4 @@
-\var keneanung = (function (keneanung) {
+var keneanung = (function (keneanung) {
     "use strict";
     keneanung.bashing = (function () {
 
