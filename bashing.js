@@ -1,4 +1,4 @@
-var keneanung = (function (keneanung) {
+\var keneanung = (function (keneanung) {
     "use strict";
     keneanung.bashing = (function () {
 
@@ -364,10 +364,6 @@ var keneanung = (function (keneanung) {
                 setTarget();
                 startAttack();
                 kecho("Nothing will stand in our way.\n");
-            } else{
-                clearTarget();
-                stopAttack();
-                kecho("Lets save them for later.\n");
             }
          };
 
