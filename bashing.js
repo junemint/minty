@@ -9,7 +9,7 @@ var keneanung = (function (keneanung) {
             autoflee: true,
             autoraze: false,
             razecommand: "none",
-            attackcommand: "kill",
+            attackcommand: "mind crush @tar",
             prios: {}
         };
 
@@ -260,7 +260,7 @@ var keneanung = (function (keneanung) {
                 var trigger = reflex_find_by_name("trigger", "keneanung.bashing.queueTrigger", false, false, "Bashing");
                 console.log(trigger);
                 reflex_enable(trigger);
-                send_direct("queue bal keneanungki", false);
+                send_direct("queue add eqbal keneanungki", false);
             }
         };
 
@@ -364,17 +364,21 @@ var keneanung = (function (keneanung) {
                 setTarget();
                 startAttack();
                 kecho("Nothing will stand in our way.\n");
+            } else{
+                clearTarget();
+                stopAttack();
+                kecho("Lets save them for later.\n");
             }
          };
 
         module.flee = function() {
             stopAttack();
-            send_direct("queue bal " + fleeDirection)
+            send_direct("queue prepend eqbal " + fleeDirection)
         };
 
         module.handleShield = function() {
             if(config.autoraze){
-                send_direct("queue bal keneanungra", false);
+                send_direct("queue prepend eqbal keneanungra", false);
             }
         };
 
@@ -395,7 +399,7 @@ var keneanung = (function (keneanung) {
             }else if(estimatedDmg > lastHealth - warnat){
                 warnFlee();
             }
-            send_direct("queue bal keneanungki", false);
+            send_direct("queue add eqbal keneanungki", false);
         };
 
         module.addPossibleTarget = function (targetName) {
