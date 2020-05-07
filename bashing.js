@@ -1,4 +1,67 @@
+var keneanung = (function (keneanung) {
+    "use strict";
+    keneanung.bashing = (function () {
 
+        var config = {
+            enabled: true,
+            warning: 1200,
+            fleeing: 1000,
+            autoflee: true,
+            autoraze: false,
+            razecommand: "none",
+            attackcommand: "kill",
+            prios: {}
+        };
+
+        var gmcpArea = "";
+        var gmcpTargetId = "";
+        var gmcpStatusTarget = "None";
+
+        var damage = 0;
+        var healing = 0;
+        var lastHealth = 0;
+        var maxHealth = 0;
+
+        var targetList = [];
+
+        var roomContent = [];
+
+        var attacking = -1;
+
+        var attacks = 0;
+
+        var fleeDirection = "n";
+        var lastRoom = "";
+
+        var colorify = function (str) {
+            var pattern = /##(\w+)##/;
+            var first = true;
+            var match;
+            while (match = pattern.exec(str)) {
+                var repl;
+                if (first && match[1] == "reset") {
+                    //skip a reset as the first tag...
+                } else if (match[1] == "reset") {
+                    repl = "</span>";
+                    first = true;
+                } else if (first) {
+                    repl = '<span style="color: ' + match[1] + '">';
+                    first = false;
+                } else {
+                    repl = '</span><span style="color: ' + match[1] + '">';
+                }
+                str = str.replace(pattern, repl);
+            }
+            if (!first) {
+                str += "</span>";
+            }
+            return str;
+        };
+
+        var linkify = function (text, codeToRun, alt) {
+            var a = $('<a ></a>');
+            a.attr('href', "javascript:void(0);");
+            a.text(text);
             a.attr('onclick', codeToRun + ";return false;");
             a.attr('title', alt);
             return a.prop("outerHTML");
